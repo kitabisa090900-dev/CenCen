@@ -22,7 +22,11 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#ff5f9e,#ff7eb3,#ff9ac6);
+    /* Photo background with a semi-transparent gradient overlay */
+    background:
+        linear-gradient(135deg, rgba(255,95,158,0.6), rgba(255,126,179,0.6), rgba(255,154,198,0.6)),
+        url('CEWE.jpg') center/cover no-repeat;
+    background-size: cover;
     overflow:hidden;
 }
 
