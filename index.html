@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Special For You ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff5f9e,#ff7eb3,#ff9ac6);
+    overflow:hidden;
+}
+
+.card{
+    width:400px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    border-radius:30px;
+    padding:40px 30px;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+    color:white;
+    position:relative;
+}
+
+h1{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.question{
+    font-size:20px;
+    margin-bottom:30px;
+    min-height:60px;
+}
+
+.btn-group{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:none;
+    padding:13px 28px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.yes{
+    background:white;
+    color:#ff4d88;
+}
+
+.no{
+    background:rgba(255,255,255,0.2);
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    animation:float 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-900px);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>Hai Kamu </h1>
+
+    <div class="question" id="question">
+        Sebelum lanjut jawab dulu ya 😆
+    </div>
+
+    <div class="btn-group" id="buttons">
+        <button class="yes" onclick="nextQuestion(1)">Lanjut 💖</button>
+    </div>
+
+</div>
+
+<script>
+
+const question = document.getElementById("question");
+const buttons = document.getElementById("buttons");
+
+let step = 0;
+
+function nextQuestion(answer){
+
+    step++;
+
+    // Pertanyaan 1
+    if(step == 1){
+        question.innerHTML = "Kamu nyaman gak ngobrol sama aku? 😁";
+
+        buttons.innerHTML = `
+            <button class="yes" onclick="nextQuestion('iya')">Nyaman ❤️</button>
+            <button class="no" onclick="nextQuestion('banget')">Banget 😳</button>
+        `;
+    }
+
+    // Pertanyaan 2
+    else if(step == 2){
+        question.innerHTML = "Kalau aku tiba-tiba ngilang, kamu bakal kangen gak? 👀";
+
+        buttons.innerHTML = `
+            <button class="yes" onclick="nextQuestion('kangen')">Kangen 😭</button>
+            <button class="no" onclick="nextQuestion('sedikit')">Sedikit 😜</button>
+        `;
+    }
+
+    // Pertanyaan 3
+    else if(step == 3){
+        question.innerHTML = "Terakhir nih...";
+
+        buttons.innerHTML = `
+            <button class="yes" onclick="nextQuestion('last')">Lanjut 💌</button>
+        `;
+    }
+
+    // Form nembak
+    else if(step == 4){
+        question.innerHTML = "Mau coba jadi pacarku? ❤️";
+
+        buttons.innerHTML = `
+            <button class="yes" id="yesBtn">Mau 💖</button>
+            <button class="no" id="noBtn">Gamau 😜</button>
+        `;
+
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+
+        noBtn.addEventListener("mouseover", () => {
+            const x = Math.random() * 250 - 100;
+            const y = Math.random() * 150 - 70;
+
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        yesBtn.addEventListener("click", () => {
+
+            question.innerHTML = "Makasih Cen Cen Cantik ❤️😍";
+
+            buttons.innerHTML = "";
+
+            for(let i=0;i<50;i++){
+                createHeart();
+            }
+        });
+    }
+}
+
+function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight + "px";
+    heart.style.fontSize = (Math.random()*25+20)+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },4000);
+}
+</script>
+
+</body>
+</html>
